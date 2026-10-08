@@ -4,8 +4,8 @@ const {setup, waitReady} = require("./util.cjs");
 const MARKDOWN = "# 標題\n\n文字\n\n```js\nconst a = 1\n```";
 // 內容主題與 highlight.js 主題的實際顏色
 const COLOR = {
-    light: {text: "rgb(36, 41, 46)", keyword: "rgb(215, 58, 73)"},     // light.css、github
-    dark: {text: "rgb(209, 213, 218)", keyword: "rgb(255, 123, 114)"}, // dark.css、github-dark
+    light: {text: "rgb(36, 41, 46)", keyword: "rgb(215, 58, 73)", code: "rgb(246, 248, 250)"},   // light.css、github、#f6f8fa
+    dark: {text: "rgb(209, 213, 218)", keyword: "rgb(255, 123, 114)", code: "rgb(13, 17, 23)"},  // dark.css、github-dark
 };
 const DARK_PREVIEW_BACKGROUND = "rgb(47, 54, 61)";
 const TRANSPARENT = "rgba(0, 0, 0, 0)";
@@ -59,6 +59,9 @@ describe("主題", () => {
                 background: style(preview, "backgroundColor"),
                 text: style(preview.querySelector("p")),
                 keyword: style(preview.querySelector(".hljs-keyword")),
+                // vditor 的 .vditor-reset pre > code 背景圖不能被主題樣式蓋掉（原生 vditor 會顯示）
+                codeBackgroundImage: (style(preview.querySelector("pre > code.hljs"), "backgroundImage") || "").startsWith("url("),
+                code: style(preview.querySelector("pre > code.hljs"), "backgroundColor"),
             },
             // vditor 原本整頁共用的內容主題 <link> 不應該出現
             contentThemeLink: !!document.getElementById("vditorContentTheme"),
@@ -74,6 +77,8 @@ describe("主題", () => {
         background: theme === "dark" ? DARK_PREVIEW_BACKGROUND : TRANSPARENT,
         text: COLOR[theme].text,
         keyword: COLOR[theme].keyword,
+        codeBackgroundImage: true,
+        code: COLOR[theme].code,
     });
 
     it("預設是 light，而且不使用 vditor 整頁共用的內容主題", async () => {

@@ -230,14 +230,15 @@ const App = () => {
 |---|---|---|
 | 編輯器外框 | vditor `classic` | vditor `dark` |
 | 內容主題 | vditor `light` | vditor `dark` |
-| 程式碼上色 | highlight.js `github` | highlight.js `github-dark` |
+| 程式碼上色 | highlight.js `github`（vditor 整頁載入的樣式） | highlight.js `github-dark` |
+| 預覽的程式碼區塊背景色 | `#f6f8fa` | `#0d1117`（`github-dark`） |
 | `<VditorPreview>` 背景色 | 不設定 | `#2f363d`（與 vditor 深色編輯區相同） |
 
 ### 說明
 
 - 各元件的主題彼此獨立，同一頁面可混用不同主題。vditor 原生以整頁共用的 `<link>` 載入內容主題，
   同一頁面只能使用一種；本套件將主題樣式局部化並併入 `index.css`，改由元件容器上的
-  `react-vditor--light` / `react-vditor--dark` class 套用。
+  `react-vditor--light` / `react-vditor--dark` class 套用。局部化不提高選擇器權重，除上表的預覽程式碼區塊背景色外，套用結果與原生 vditor 相同。
 - 切換主題不會重建編輯器。
 - `theme` prop 取代 vditor 原生的 `theme`（`classic` / `dark`）與 `preview.theme` 設定；ref 亦不提供 `setTheme`。
 
@@ -370,7 +371,7 @@ const html = await md2html(markdown, {transform: sanitize});
 - 網址不合法的連結轉為純文字，僅作用於 `<VditorPreview>`、`md2html()` 與編輯器的預覽區；ir / wysiwyg 模式的編輯區不套用 `transform`，連結仍會顯示
 - `$$ … $$` 區塊會以程式碼區塊呈現（Lute 未提供停用此語法的設定）
 - `:smile:` 等 emoji 代碼會轉為對應字元，YAML front matter 會以程式碼區塊呈現；兩者雖非 GFM 語法，仍予以保留
-- vditor 無論設定為何，都會整頁載入 highlight.js 的 `github.min.css`；`dark` 主題的程式碼樣式以局部化且優先權較高的規則覆寫
+- vditor 無論設定為何，都會整頁載入 highlight.js 的 `github.min.css`；`light` 主題直接沿用，`dark` 主題的程式碼樣式以權重略高的局部化規則覆寫
 - 啟用 `cache` 且未提供 `value` 時，若快取內容包含 `$…$`，初次渲染會嘗試載入未輸出的 katex，產生本機 404
 
 ## 開發

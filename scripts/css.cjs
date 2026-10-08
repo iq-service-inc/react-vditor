@@ -1,6 +1,5 @@
-// 產生套件的 index.css：vditor 的樣式，加上只作用在容器裡的 light / dark 主題。
-// vditor 原本用整頁共用的 <link> 載入內容主題與程式碼主題，同一頁只能有一種；
-// 這裡把它們加上 .react-vditor--light / .react-vditor--dark 前綴，由元件在自己的容器加 class 決定用哪個。
+// 產生 dist/index.css：vditor 基礎樣式，以及以容器 class（.react-vditor--light / .react-vditor--dark）限定範圍的主題樣式。
+// 範圍限定不提高選擇器權重，以維持與原生 vditor 相同的層疊結果。
 const fs = require("fs");
 const path = require("path");
 const postcss = require("postcss");
@@ -15,13 +14,12 @@ const scoped = (file, prefix) => {
 
 const buildCss = () => [
     fs.readFileSync(path.join(DIST, "index.css"), "utf8"),
-    "/* react-vditor light / dark 主題，只作用在 .react-vditor--light / .react-vditor--dark 容器裡 */",
-    scoped("css/content-theme/light.css", ".react-vditor--light"),
-    scoped("js/highlight.js/styles/github.min.css", ".react-vditor--light"),
-    scoped("css/content-theme/dark.css", ".react-vditor--dark"),
-    // vditor 一定會整頁載入 github.min.css；這裡的規則多了前綴，優先權比較高，會蓋過它
-    scoped("js/highlight.js/styles/github-dark.min.css", ".react-vditor--dark"),
-    // 深色內容主題只改文字顏色；<VditorPreview> 用編輯器深色編輯區的背景色
+    "/* react-vditor：light / dark 主題 */",
+    scoped("css/content-theme/light.css", ":where(.react-vditor--light)"),
+    scoped("css/content-theme/dark.css", ":where(.react-vditor--dark)"),
+    // light 沿用 vditor 全域載入的 github.min.css；dark 以型別選擇器 div 增加 (0,0,1) 權重覆寫（主題容器均為 <div>）
+    scoped("js/highlight.js/styles/github-dark.min.css", "div:where(.react-vditor--dark)"),
+    ":where(.react-vditor--light) .vditor-reset pre > code.hljs { background-color: #f6f8fa; }",
     ".react-vditor-preview.react-vditor--dark { background-color: #2f363d; }",
 ].join("\n");
 
