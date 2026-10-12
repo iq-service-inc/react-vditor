@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1](https://github.com/wyttime04/react-vditor/releases/tag/v1.0.1) (2026-10-12)
+
+### fix
+
+* 修正預覽的程式碼區塊背景 ([2511375](https://github.com/wyttime04/react-vditor/commit/2511375))
+
 ## [1.0.0](https://github.com/wyttime04/react-vditor/releases/tag/v1.0.0) (2026-10-07)
 
 ### ⚠ BREAKING CHANGES
