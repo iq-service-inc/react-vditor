@@ -126,6 +126,24 @@ describe("React 16.9", () => {
         await page.close();
     });
 
+    it("VditorPreview：前一次渲染還沒完成就更新 value，程式碼仍正確上色", async () => {
+        const result = await env.openPage();
+        const {page} = result;
+        // 全新頁面還沒載入上色腳本；掛載後立刻更新，兩次渲染的非同步步驟會重疊
+        await page.evaluate((code) => {
+            window.harness.mount("preview", {value: `${code}\n\n第一次`});
+            window.harness.update({value: `${code}\n\n第二次`});
+        }, "```js\nconst a = 1;\n```");
+        await page.waitForSelector("#root code.hljs");
+        await page.waitForNetworkIdle({idleTime: 500});
+        expect(await page.evaluate(() => ({
+            text: document.querySelector("#root .vditor-reset").textContent.includes("第二次"),
+            highlighted: !!document.querySelector("#root code.hljs .hljs-keyword"),
+        }))).toEqual({text: true, highlighted: true});
+        expectClean(result);
+        await page.close();
+    });
+
     it.each(["ir", "wysiwyg", "sv"])("%s 編輯器：打字觸發 input，內容與行內數學式原樣保留", async (mode) => {
         const result = await mountEditor({mode, value: MIXED});
         const {page} = result;

@@ -104,7 +104,11 @@ const App = () => {
                             return null;
                         },
                     }}
-                    after={() => addLog("after")}
+                    after={() => {
+                        addLog("after");
+                        // vditor 正規化後的內容存入 value
+                        setValue(editorRef.current.getValue());
+                    }}
                     focus={() => addLog("focus")}
                     blur={() => addLog("blur")}
                 />

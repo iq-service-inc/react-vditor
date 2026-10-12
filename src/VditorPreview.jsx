@@ -15,11 +15,14 @@ export const VditorPreview = (props) => {
     const optionsKey = JSON.stringify(options);
 
     React.useEffect(() => {
-        VditorCore.preview(elementRef.current, value, previewOptions(options));
+        // 每次渲染使用新的子元素，隔離前一次 Vditor.preview 未完成的非同步處理（如程式碼上色）
+        const target = document.createElement("div");
+        elementRef.current.replaceChildren(target);
+        VditorCore.preview(target, value, previewOptions(options));
     }, [value, optionsKey]);   // options 以內容比較（optionsKey），不放物件本身
 
     // 主題只看外層容器的 class（index.css 裡局部化的樣式），換主題不用重新渲染；
-    // 內層交給 Vditor.preview，它會在上面加 vditor-reset
+    // 內層的子元素交給 Vditor.preview，它會在上面加 vditor-reset
     const wrapperClassName = ["react-vditor-preview", themeClassName(theme), className].filter(Boolean).join(" ");
     return <div className={wrapperClassName} style={style}>
         <div ref={elementRef}/>
