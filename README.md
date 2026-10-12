@@ -1,19 +1,19 @@
-# @wyttime04/react-vditor
+# @iqs/react-vditor
 
-[![GitHub](https://img.shields.io/badge/GitHub-wyttime04%2Freact--vditor-24292f?logo=github)](https://github.com/wyttime04/react-vditor)
-[![npm](https://img.shields.io/npm/v/@wyttime04/react-vditor)](https://www.npmjs.com/package/@wyttime04/react-vditor)
-[![license](https://img.shields.io/npm/l/@wyttime04/react-vditor)](https://github.com/wyttime04/react-vditor/blob/main/LICENSE)
-[![vditor](https://img.shields.io/npm/dependency-version/@wyttime04/react-vditor/vditor)](https://github.com/Vanessa219/vditor)
-[![react](https://img.shields.io/npm/dependency-version/@wyttime04/react-vditor/peer/react)](https://github.com/wyttime04/react-vditor#相容性)
+[![GitHub](https://img.shields.io/badge/GitHub-iq--service--inc%2Freact--vditor-24292f?logo=github)](https://github.com/iq-service-inc/react-vditor)
+[![npm](https://img.shields.io/npm/v/@iqs/react-vditor)](https://www.npmjs.com/package/@iqs/react-vditor)
+[![license](https://img.shields.io/npm/l/@iqs/react-vditor)](https://github.com/iq-service-inc/react-vditor/blob/main/LICENSE)
+[![vditor](https://img.shields.io/npm/dependency-version/@iqs/react-vditor/vditor)](https://github.com/Vanessa219/vditor)
+[![react](https://img.shields.io/npm/dependency-version/@iqs/react-vditor/peer/react)](https://github.com/iq-service-inc/react-vditor#相容性)
 
 以 [vditor](https://github.com/Vanessa219/vditor) 4.0.0 為基礎的 React 元件，**僅支援 GFM 語法，並可於完全離線的環境運作**。
 
 - mermaid、數學式、echarts 等 GFM 以外的附加渲染一律停用，相關區塊以一般程式碼區塊呈現
 - 執行期僅載入同源資源，不連線至任何 CDN
 
-**Online Demo**：[wyttime04.github.io/react-vditor](https://wyttime04.github.io/react-vditor/)
+**Online Demo**：[iq-service-inc.github.io/react-vditor](https://iq-service-inc.github.io/react-vditor/)
 
-**NPM Package**：[@wyttime04/react-vditor](https://www.npmjs.com/package/@wyttime04/react-vditor)
+**NPM Package**：[@iqs/react-vditor](https://www.npmjs.com/package/@iqs/react-vditor)
 
 ## 相容性
 
@@ -25,7 +25,7 @@
 ## 安裝
 
 ```sh
-npm install @wyttime04/react-vditor
+npm install @iqs/react-vditor
 ```
 
 ### 設定 webpack
@@ -35,7 +35,7 @@ npm install @wyttime04/react-vditor
 
 ```js
 // webpack.config.js
-const VditorAssetsPlugin = require("@wyttime04/react-vditor/webpack-plugin");
+const VditorAssetsPlugin = require("@iqs/react-vditor/webpack-plugin");
 
 module.exports = {
     // ...
@@ -50,7 +50,7 @@ module.exports = {
 ### 載入樣式
 
 ```js
-import "@wyttime04/react-vditor/index.css";
+import "@iqs/react-vditor/index.css";
 ```
 
 `index.css` 包含 vditor 的樣式，以及本套件局部化後的 `light` / `dark` 主題樣式。
@@ -58,8 +58,8 @@ import "@wyttime04/react-vditor/index.css";
 ## 使用方式
 
 ```jsx
-import {Vditor, VditorPreview, md2html} from "@wyttime04/react-vditor";
-import "@wyttime04/react-vditor/index.css";
+import {Vditor, VditorPreview, md2html} from "@iqs/react-vditor";
+import "@iqs/react-vditor/index.css";
 
 // 編輯器
 const ref = useRef(null);
@@ -202,7 +202,7 @@ props 沿用 `Vditor.preview` 的 `IPreviewOptions`，另增 `value`（要渲染
 值變更時，這些元件會同步切換。
 
 ```jsx
-import {VditorThemeProvider} from "@wyttime04/react-vditor";
+import {VditorThemeProvider} from "@iqs/react-vditor";
 
 const App = () => {
     // 主題值由應用程式自行管理；是否保存（例如 localStorage、使用者設定）由應用程式決定
@@ -392,7 +392,7 @@ npm test             # 建置測試頁、檢查型別，並執行 puppeteer 測�
 可切換主題（透過 `VditorThemeProvider`），並呼叫 ref 的 `insertValue`, `disabled` / `enable`, `getValue`。
 上傳的圖片（工具列、拖放、貼上）不會實際上傳，以 `blob:` 網址直接顯示。
 
-`dev/main.jsx` 與使用端相同，以 `import "@wyttime04/react-vditor"` 及 `import "@wyttime04/react-vditor/index.css"` 引用套件，
+`dev/main.jsx` 與使用端相同，以 `import "@iqs/react-vditor"` 及 `import "@iqs/react-vditor/index.css"` 引用套件，
 由 `dev/webpack.config.cjs` 依 mode 決定來源：
 
 | mode | 指令 | 套件來源 |

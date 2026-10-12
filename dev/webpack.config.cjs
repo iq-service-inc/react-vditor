@@ -1,4 +1,4 @@
-// 開發用畫面。照使用端的方式 import "@wyttime04/react-vditor"，依 mode 決定套件來源：
+// 開發用畫面。照使用端的方式 import "@iqs/react-vditor"，依 mode 決定套件來源：
 // - development（npm start，http://localhost:9000）：吃 src 的原始碼，改了會自動重新整理，不用先 build
 // - production（npm run preview、npm run build:page）：吃 npm run build 產出的 dist，經 package.json 的 exports 解析
 const path = require("path");
@@ -26,8 +26,8 @@ module.exports = (env, argv) => {
             extensionAlias: {".js": [".js", ".jsx"]},
             // production 不設 alias：跟使用端一樣解析到 dist
             alias: production ? {} : {
-                "@wyttime04/react-vditor$": path.join(root, "src/index.js"),
-                "@wyttime04/react-vditor/index.css$": path.join(__dirname, "index.css.cjs"),
+                "@iqs/react-vditor$": path.join(root, "src/index.js"),
+                "@iqs/react-vditor/index.css$": path.join(__dirname, "index.css.cjs"),
             },
         },
         module: {

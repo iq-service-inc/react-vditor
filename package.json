@@ -1,5 +1,5 @@
 {
-    "name": "@wyttime04/react-vditor",
+    "name": "@iqs/react-vditor",
     "version": "1.0.2",
     "description": "React component for the Vditor Markdown editor, limited to GFM and fully offline",
     "keywords": [
@@ -15,7 +15,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/wyttime04/react-vditor.git"
+        "url": "git+https://github.com/iq-service-inc/react-vditor.git"
     },
     "type": "module",
     "main": "./dist/index.js",
