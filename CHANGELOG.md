@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.2](https://github.com/wyttime04/react-vditor/releases/tag/v1.0.2) (2026-10-12)
+
+### fix
+
+* 修復 `<VditorPreview>` 在前一次渲染完成前更新 `value` 時，程式碼區塊不會上色 ([cf741d3](https://github.com/wyttime04/react-vditor/commit/cf741d3))
+
 ## [1.0.1](https://github.com/wyttime04/react-vditor/releases/tag/v1.0.1) (2026-10-12)
 
 ### fix
