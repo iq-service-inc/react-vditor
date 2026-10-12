@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.3](https://github.com/iq-service-inc/react-vditor/releases/tag/v1.0.3) (2026-10-12)
+
+套件改由公司維護，名稱由 `@wyttime04/react-vditor` 改為 `@iqs/react-vditor`，程式碼與 1.0.2 相同。
+
 ## [1.0.2](https://github.com/iq-service-inc/react-vditor/releases/tag/v1.0.2) (2026-10-12)
 
 ### fix
