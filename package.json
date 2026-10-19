@@ -51,7 +51,7 @@
         "test": "npm run build:test && npm run test:types && jest"
     },
     "dependencies": {
-        "vditor": "4.0.0"
+        "vditor": "4.0.1"
     },
     "peerDependencies": {
         "react": ">=16.9.0 <20",

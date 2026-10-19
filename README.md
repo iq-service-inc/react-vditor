@@ -6,7 +6,7 @@
 [![vditor](https://img.shields.io/npm/dependency-version/@iqs/react-vditor/vditor)](https://github.com/Vanessa219/vditor)
 [![react](https://img.shields.io/npm/dependency-version/@iqs/react-vditor/peer/react)](https://github.com/iq-service-inc/react-vditor#相容性)
 
-以 [vditor](https://github.com/Vanessa219/vditor) 4.0.0 為基礎的 React 元件，**僅支援 GFM 語法，並可於完全離線的環境運作**。
+以 [vditor](https://github.com/Vanessa219/vditor) 4.0.1 為基礎的 React 元件，**僅支援 GFM 語法，並可於完全離線的環境運作**。
 
 - mermaid、數學式、echarts 等 GFM 以外的附加渲染一律停用，相關區塊以一般程式碼區塊呈現
 - 執行期僅載入同源資源，不連線至任何 CDN
