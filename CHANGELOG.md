@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.4](https://github.com/iq-service-inc/react-vditor/releases/tag/v1.0.4) (2026-10-19)
+
+### refactor
+
+* 改用 vditor 4.0.1 的 `markdown.inlineMath: false` 停用行內數學式；啟用 `cache` 且未提供 `value` 時，快取內容的 `$…$` 不再載入 katex ([fc2379b](https://github.com/iq-service-inc/react-vditor/commit/fc2379b))
+* `gfmTransform` 不再將行內數學式還原為 `$…$` ([fc2379b](https://github.com/iq-service-inc/react-vditor/commit/fc2379b))
+
+### chore
+
+* 升級 vditor 至 4.0.1 ([a4175e0](https://github.com/iq-service-inc/react-vditor/commit/a4175e0))
+
 ## [1.0.3](https://github.com/iq-service-inc/react-vditor/releases/tag/v1.0.3) (2026-10-12)
 
 套件改由公司維護，名稱由 `@wyttime04/react-vditor` 改為 `@iqs/react-vditor`，程式碼與 1.0.2 相同。

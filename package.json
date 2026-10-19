@@ -1,6 +1,6 @@
 {
     "name": "@iqs/react-vditor",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "React component for the Vditor Markdown editor, limited to GFM and fully offline",
     "keywords": [
         "react",
