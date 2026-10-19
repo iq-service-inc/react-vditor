@@ -159,6 +159,21 @@ describe("React 16.9", () => {
         await page.close();
     });
 
+    it("啟用 cache 且沒給 value：快取內容的行內數學式原樣顯示，不載入 katex", async () => {
+        const result = await env.openPage();
+        const {page} = result;
+        await page.evaluate(() => {
+            localStorage.setItem("react-vditor-test", "行內 $x^2$");
+            window.harness.mount("editor", {cache: {enable: true, id: "react-vditor-test"}});
+        });
+        await waitReady(page);
+        await page.waitForNetworkIdle({idleTime: 500});
+
+        expect(await page.evaluate(() => document.querySelector("#root .vditor-reset").textContent)).toContain("行內 $x^2$");
+        expectClean(result);
+        await page.close();
+    });
+
     it("ready 前透過 ref 呼叫的方法會排隊，ready 後依序執行", async () => {
         const result = await env.openPage();
         const {page} = result;

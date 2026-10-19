@@ -8,6 +8,7 @@ export const gfmEditorOptions = () => ({
             footnotes: false,          // GFM 以外、預設開著的只有註腳
             codeBlockPreview: false,   // ir / wysiwyg 的程式碼區塊不開預覽面板，否則會去渲染 mermaid 等區塊
             mathBlockPreview: false,   // 同上，$$ 區塊
+            inlineMath: false,         // $…$ 視為一般文字
         },
         render: {media: {enable: false}},   // 不把影片、音訊連結嵌成 iframe
     },
@@ -15,6 +16,6 @@ export const gfmEditorOptions = () => ({
 
 /** Vditor.preview */
 export const gfmPreviewOptions = () => ({
-    markdown: {footnotes: false},
+    markdown: {footnotes: false, inlineMath: false},
     render: {media: {enable: false}},
 });

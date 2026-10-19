@@ -86,8 +86,6 @@ export const Vditor = React.forwardRef(function Vditor(props, ref) {
                 instance.destroy();
                 return;
             }
-            // Lute 預設把 $…$ 當成數學式，GFM 沒有這個語法；關掉之後才放入內容，讓它原樣顯示成文字
-            instance.vditor.lute.SetInlineMath(false);
             // ready 前主題若變過（例如 auto 跟著系統切換），這裡補上
             instance.setTheme(editorTheme(themeRef.current));
             // 用 contentRef：ready 前使用端若改過 value，這裡一併套用
@@ -102,9 +100,8 @@ export const Vditor = React.forwardRef(function Vditor(props, ref) {
         };
 
         const {className, style, ...options} = propsRef.current;
-        // 先用空內容建立，after 裡關掉行內數學式之後才放入真正的內容；否則初次渲染就會去載入 katex
         const instance = new VditorCore(host, {
-            ...editorOptions({...options, value: "", theme: editorTheme(themeRef.current)}),
+            ...editorOptions({...options, theme: editorTheme(themeRef.current)}),
             ...callbacks,
         });
 

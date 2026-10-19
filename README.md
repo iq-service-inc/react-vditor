@@ -333,7 +333,7 @@ const editorRef = useRef(null);
 | `preview.render.media.enable` | `false` | 不將影片、音訊連結嵌入為 iframe |
 | `preview.transform` | GFM 以外的區塊轉為一般程式碼區塊；網址不合法的連結轉為純文字 | 網址規則同 DOMPurify 的 `IS_ALLOWED_URI`：允許 `http(s)`、`mailto`、`tel` 等協定與相對路徑。使用端傳入的 `transform` 會於其後執行 |
 | `preview.theme.current` | `""`（固定） | 內容主題改由 `theme` 決定，不使用 vditor 整頁共用的 `<link>` |
-| 行內數學式 `$…$` | 視為一般文字 | GFM 不包含數學式 |
+| `preview.markdown.inlineMath` | `false` | 行內數學式 `$…$` 視為一般文字；GFM 不包含數學式 |
 
 ## XSS 防護
 
@@ -372,7 +372,6 @@ const html = await md2html(markdown, {transform: sanitize});
 - `$$ … $$` 區塊會以程式碼區塊呈現（Lute 未提供停用此語法的設定）
 - `:smile:` 等 emoji 代碼會轉為對應字元，YAML front matter 會以程式碼區塊呈現；兩者雖非 GFM 語法，仍予以保留
 - vditor 無論設定為何，都會整頁載入 highlight.js 的 `github.min.css`；`light` 主題直接沿用，`dark` 主題的程式碼樣式以權重略高的局部化規則覆寫
-- 啟用 `cache` 且未提供 `value` 時，若快取內容包含 `$…$`，初次渲染會嘗試載入未輸出的 katex，產生本機 404
 
 ## 開發
 

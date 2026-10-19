@@ -7,12 +7,10 @@ const CODE_LANGUAGES = "smiles|wavedrom|markmap|math";
 
 const DIV_PATTERN = new RegExp(`<div(?: data-code="[^"]*")? class="language-(${DIV_LANGUAGES})">([\\s\\S]*?)</div>`, "g");
 const CODE_PATTERN = new RegExp(`<code class="language-(${CODE_LANGUAGES})">`, "g");
-const INLINE_MATH_PATTERN = /<span class="language-math">([\s\S]*?)<\/span>/g;
 
 /**
  * class 改成 language-plaintext，渲染器就找不到它們，也就不會去載入沒輸出的套件；原本的語言留在 data-lang。
  */
 export const gfmTransform = (html) => html
     .replace(DIV_PATTERN, '<pre><code class="language-plaintext" data-lang="$1">$2</code></pre>')
-    .replace(CODE_PATTERN, '<code class="language-plaintext" data-lang="$1">')
-    .replace(INLINE_MATH_PATTERN, "$$$1$$");
+    .replace(CODE_PATTERN, '<code class="language-plaintext" data-lang="$1">');
