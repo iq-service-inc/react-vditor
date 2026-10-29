@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.0](https://github.com/iq-service-inc/react-vditor/releases/tag/v1.1.0) (2026-10-29)
+
+### ⚠ BREAKING CHANGES
+
+* 不再提供 ir 模式：`mode="ir"` 改用 `wysiwyg`，TypeScript 中傳入 `"ir"` 會報錯 ([8835cc6](https://github.com/iq-service-inc/react-vditor/commit/8835cc6))
+
+### feat
+
+* 工具列的 `edit-mode` 換成「分割預覽」切換按鈕，在 wysiwyg 與 sv 之間切換，sv 模式時標示為作用中 ([8835cc6](https://github.com/iq-service-inc/react-vditor/commit/8835cc6))
+* `disabled()` 停用全部工具列按鈕（含 `more` 中的「預覽」等），`enable()` 時還原 ([8835cc6](https://github.com/iq-service-inc/react-vditor/commit/8835cc6))
+
 ## [1.0.4](https://github.com/iq-service-inc/react-vditor/releases/tag/v1.0.4) (2026-10-19)
 
 ### refactor
