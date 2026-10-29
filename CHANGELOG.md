@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1](https://github.com/iq-service-inc/react-vditor/releases/tag/v1.1.1) (2026-10-29)
+
+### feat
+
+* 編輯模式切換按鈕改用原生 `edit-mode` 的圖示與提示文字（依 `lang` 顯示「切換編輯模式」） ([528b756](https://github.com/iq-service-inc/react-vditor/commit/528b756))
+
 ## [1.1.0](https://github.com/iq-service-inc/react-vditor/releases/tag/v1.1.0) (2026-10-29)
 
 ### ⚠ BREAKING CHANGES
