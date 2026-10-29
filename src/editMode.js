@@ -1,7 +1,7 @@
 // 編輯模式僅提供 wysiwyg 與 sv：edit-mode 換成切換分割預覽的按鈕，並停用 ir 的快捷鍵。
 // vditor 未公開切換模式的 API，按鈕以模擬快捷鍵（Ctrl / ⌘ + Alt + 7、9）切換。
 
-/** 切換按鈕的 name；沿用 vditor 語系檔的鍵名，按鈕提示隨 lang 顯示 */
+/** 切換按鈕的 name */
 const BUTTON_NAME = "splitView";
 
 /** vditor 切換模式的快捷鍵 */
@@ -17,8 +17,7 @@ export const resolveMode = (mode) => (mode === "ir" ? "wysiwyg" : mode);
 
 const toggleButton = {
     name: BUTTON_NAME,
-    icon: '<svg><use xlink:href="#vditor-icon-both"></use></svg>',
-    hotkey: "⌥⌘9",
+    icon: '<svg><use xlink:href="#vditor-icon-edit"></use></svg>',
     tipPosition: "nw",
     click: (event, vditor) => {
         const mac = isMac();
@@ -48,13 +47,15 @@ export const markCurrentMode = (root, mode) => {
 };
 
 /**
- * 編輯器就緒後呼叫：隱藏原生 edit-mode，並讓切換按鈕跟隨其停用狀態。
+ * 編輯器就緒後呼叫：隱藏原生 edit-mode，切換按鈕沿用其提示文字並跟隨其停用狀態。
  * vditor 的 disabled()、enable() 與預覽模式只依名稱停用 edit-mode
  */
 export const initToggleModeButton = (root, mode) => {
     const native = root.querySelector('.vditor-toolbar [data-type="edit-mode"]');
     if (native) {
         native.parentElement.style.display = "none";
+        // 提示文字沿用原生 edit-mode（vditor 依 lang 產生）
+        toggleButtons(root).forEach((button) => button.setAttribute("aria-label", native.getAttribute("aria-label")));
         const syncDisabled = () => toggleButtons(root).forEach((button) =>
             button.classList.toggle("vditor-menu--disabled", native.classList.contains("vditor-menu--disabled")));
         syncDisabled();

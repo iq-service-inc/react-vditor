@@ -217,7 +217,7 @@ describe("工具列", () => {
         const {page} = result;
         expect(await page.$eval('.vditor-toolbar [data-type="edit-mode"]', (button) => button.offsetParent)).toBeNull();
         expect(await page.$eval('.vditor-toolbar [data-type="splitView"]', (button) => button.getAttribute("aria-label")))
-            .toMatch(/^分割預覽 </);
+            .toBe("切換編輯模式");
 
         const states = [[await currentMode(page), await toggleActive(page)]];
         for (let i = 0; i < 2; i++) {

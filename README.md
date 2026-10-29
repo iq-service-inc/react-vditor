@@ -262,7 +262,7 @@ const App = () => {
 
 - 移除 `export`（寫死連線至 CDN）、`devtools`（依賴 echarts）、`info`（寫死 unpkg 的圖片網址）
 - 移除 `emoji`, `record`, `code-theme`, `content-theme`, `help`
-- `edit-mode` 換成分割預覽的切換按鈕，詳見「[編輯模式](#編輯模式)」
+- `edit-mode` 換成編輯模式的切換按鈕，詳見「[編輯模式](#編輯模式)」
 - 呼叫 `disabled()` 時停用全部按鈕（vditor 原生只停用編輯相關的按鈕，`more` 中的「預覽」等仍可操作），`enable()` 時還原
 
 傳入 `toolbar` prop 時，會完整取代預設工具列。
@@ -271,7 +271,7 @@ const App = () => {
 
 僅提供 wysiwyg（所見即所得）與 sv（分割預覽）兩種模式，不提供 ir（即時渲染）。
 
-- 工具列的 `edit-mode` 換成「分割預覽」切換按鈕：按下在兩種模式間切換，sv 模式時按鈕標示為作用中
+- 工具列的 `edit-mode` 換成切換按鈕（圖示與提示文字同原生 `edit-mode`）：按下在兩種模式間切換，sv 模式時按鈕標示為作用中
 - 呼叫 `disabled()` 或進入預覽模式時，切換按鈕與原生 `edit-mode` 一樣停用
 - 快捷鍵 Ctrl / ⌘ + Alt + 7、9 可切換至 wysiwyg、sv；切換至 ir 的 Ctrl / ⌘ + Alt + 8 不會作用
 - `mode` 為 `ir` 時改用 `wysiwyg`
