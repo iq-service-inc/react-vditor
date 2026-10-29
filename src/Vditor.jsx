@@ -1,6 +1,6 @@
 import * as React from "react";
 import VditorCore from "vditor";
-import {bindEditMode, initToggleModeButton, resolveMode} from "./editMode.js";
+import {bindModeHotkeys, initModeButton, resolveMode} from "./editMode.js";
 import {editorOptions} from "./options/default.js";
 import {disableToolbarWithEditor} from "./toolbar/index.js";
 import {themeClassName, useResolvedTheme} from "./theme.js";
@@ -97,7 +97,7 @@ export const Vditor = React.forwardRef(function Vditor(props, ref) {
             const queue = queueRef.current;
             queueRef.current = [];
             queue.forEach((run) => run(instance));
-            initToggleModeButton(host, instance.getCurrentMode());
+            initModeButton(host, instance.getCurrentMode());
             contentRef.current = instance.getValue();
             propsRef.current.after?.();
         };
@@ -107,13 +107,13 @@ export const Vditor = React.forwardRef(function Vditor(props, ref) {
             ...editorOptions({...options, theme: editorTheme(themeRef.current)}),
             ...callbacks,
         });
-        const unbindEditMode = bindEditMode(host, () => instance.getCurrentMode());
+        const unbindModeHotkeys = bindModeHotkeys(host, () => instance.getCurrentMode());
         disableToolbarWithEditor(instance, host);
 
         return () => {
             disposed = true;
             editorRef.current = null;
-            unbindEditMode();
+            unbindModeHotkeys();
             if (ready) {
                 contentRef.current = instance.getValue();
                 instance.destroy();
