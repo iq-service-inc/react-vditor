@@ -1,4 +1,5 @@
 // 套件的預設選項：預設值合併 gfm.js 的 GFM 限定設定，再疊上使用端的選項
+import {expandEditMode, resolveMode} from "../editMode.js";
 import {TOOLBAR, expandToolbar} from "../toolbar/index.js";
 import {previewTransform} from "../transforms/index.js";
 import {uploadableOnly} from "../upload.js";
@@ -47,7 +48,9 @@ export const editorOptions = (options) => {
         // 內容主題不交給 vditor（它用整頁共用的 <link>），改由元件容器的 class 套用 index.css 裡局部化的主題
         theme: {...merged.preview.theme, current: ""},
     };
-    merged.toolbar = expandToolbar(merged.toolbar, merged.lang, upload.imageOnly);
+    // 編輯模式僅提供 wysiwyg 與 sv
+    merged.mode = resolveMode(merged.mode);
+    merged.toolbar = expandEditMode(expandToolbar(merged.toolbar, merged.lang, upload.imageOnly));
     return merged;
 };
 

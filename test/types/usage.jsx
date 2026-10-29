@@ -9,7 +9,7 @@ const ref = React.createRef();
 
 export const Editor = () => <Vditor
     ref={ref}
-    mode="ir"
+    mode="sv"
     theme="dark"
     value="# hi"
     input={(value) => value.trim()}
@@ -39,8 +39,8 @@ export const previewed = previewTransform("<p>x</p>");
 // @ts-expect-error imageOnly 是布林值
 export const WrongImageOnly = () => <Vditor upload={{imageOnly: "yes"}}/>;
 
-// @ts-expect-error mode 只能是 ir / wysiwyg / sv
-export const WrongMode = () => <Vditor mode="markdown"/>;
+// @ts-expect-error mode 只能是 wysiwyg / sv
+export const WrongMode = () => <Vditor mode="ir"/>;
 
 // @ts-expect-error VditorPreview 一定要給 value
 export const MissingValue = () => <VditorPreview/>;

@@ -121,7 +121,7 @@ const editorRef = useRef(null);
 | | `exportJSON(markdown)` | 將 Markdown 轉換為 JSON（語法樹） |
 | 編輯狀態 | `focus()`, `blur()` | 取得／移除焦點 |
 | | `disabled()`, `enable()` | 停用／啟用編輯器 |
-| | `getCurrentMode()` | 取得目前的編輯模式（`wysiwyg` / `ir` / `sv`） |
+| | `getCurrentMode()` | 取得目前的編輯模式（`wysiwyg` / `sv`） |
 | | `clearStack()` | 清除復原紀錄 |
 | | `isUploading()` | 是否仍有上傳進行中 |
 | 游標與選取 | `getSelection()` | 取得選取的文字 |
@@ -262,8 +262,20 @@ const App = () => {
 
 - 移除 `export`（寫死連線至 CDN）、`devtools`（依賴 echarts）、`info`（寫死 unpkg 的圖片網址）
 - 移除 `emoji`, `record`, `code-theme`, `content-theme`, `help`
+- `edit-mode` 換成分割預覽的切換按鈕，詳見「[編輯模式](#編輯模式)」
+- 呼叫 `disabled()` 時停用全部按鈕（vditor 原生只停用編輯相關的按鈕，`more` 中的「預覽」等仍可操作），`enable()` 時還原
 
 傳入 `toolbar` prop 時，會完整取代預設工具列。
+
+### 編輯模式
+
+僅提供 wysiwyg（所見即所得）與 sv（分割預覽）兩種模式，不提供 ir（即時渲染）。
+
+- 工具列的 `edit-mode` 換成「分割預覽」切換按鈕：按下在兩種模式間切換，sv 模式時按鈕標示為作用中
+- 呼叫 `disabled()` 或進入預覽模式時，切換按鈕與原生 `edit-mode` 一樣停用
+- 快捷鍵 Ctrl / ⌘ + Alt + 7、9 可切換至 wysiwyg、sv；切換至 ir 的 Ctrl / ⌘ + Alt + 8 不會作用
+- `mode` 為 `ir` 時改用 `wysiwyg`
+- 切換按鈕以模擬快捷鍵切換，`keydown` 回呼也會收到該事件
 
 ### 上傳
 
@@ -322,7 +334,7 @@ const editorRef = useRef(null);
 
 | 設定 | 預設值 | 說明 |
 |---|---|---|
-| `mode` | `wysiwyg` | vditor 原生為 `ir` |
+| `mode` | `wysiwyg` | vditor 原生為 `ir`。僅支援 `wysiwyg` / `sv`，詳見「[編輯模式](#編輯模式)」 |
 | `lang` | `zh_TW` | |
 | `theme` | `light` | 僅支援 `light` / `dark` / `auto`，詳見「[主題](#主題)」 |
 | `toolbar` | 詳見「[預設工具列](#預設工具列)」 | |
@@ -371,6 +383,7 @@ const html = await md2html(markdown, {transform: sanitize});
 - 網址不合法的連結轉為純文字，僅作用於 `<VditorPreview>`、`md2html()` 與編輯器的預覽區；ir / wysiwyg 模式的編輯區不套用 `transform`，連結仍會顯示
 - `$$ … $$` 區塊會以程式碼區塊呈現（Lute 未提供停用此語法的設定）
 - `:smile:` 等 emoji 代碼會轉為對應字元，YAML front matter 會以程式碼區塊呈現；兩者雖非 GFM 語法，仍予以保留
+- 編輯模式的切換按鈕依賴 vditor 內部的切換模式快捷鍵（vditor 未公開切換模式的 API）
 - vditor 無論設定為何，都會整頁載入 highlight.js 的 `github.min.css`；`light` 主題直接沿用，`dark` 主題的程式碼樣式以權重略高的局部化規則覆寫
 
 ## 開發

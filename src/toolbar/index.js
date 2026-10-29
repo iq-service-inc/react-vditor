@@ -30,3 +30,25 @@ export const expandToolbar = (toolbar, lang, imageOnly) => toolbar.map((item) =>
     }
     return item?.toolbar ? {...item, toolbar: expandToolbar(item.toolbar, lang, imageOnly)} : item;
 });
+
+/**
+ * vditor 的 disabled() 只停用編輯相關的按鈕；其餘按鈕（如 more 中的「預覽」）仍可操作，可能使停用狀態失效。
+ * 改寫 instance 的 disabled()、enable()：停用時一併停用其餘按鈕，啟用時只還原這些按鈕，其他交由 vditor 處理
+ */
+export const disableToolbarWithEditor = (instance, root) => {
+    const disabled = instance.disabled.bind(instance);
+    const enable = instance.enable.bind(instance);
+    let extra = [];
+    instance.disabled = () => {
+        disabled();
+        // 連續呼叫時累加，enable() 才能全部還原
+        const buttons = [...root.querySelectorAll(".vditor-toolbar__item > [data-type]:not(.vditor-menu--disabled)")];
+        buttons.forEach((button) => button.classList.add("vditor-menu--disabled"));
+        extra = extra.concat(buttons);
+    };
+    instance.enable = () => {
+        extra.forEach((button) => button.classList.remove("vditor-menu--disabled"));
+        extra = [];
+        enable();
+    };
+};

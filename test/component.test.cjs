@@ -144,7 +144,7 @@ describe("React 16.9", () => {
         await page.close();
     });
 
-    it.each(["ir", "wysiwyg", "sv"])("%s 編輯器：打字觸發 input，內容與行內數學式原樣保留", async (mode) => {
+    it.each(["wysiwyg", "sv"])("%s 編輯器：打字觸發 input，內容與行內數學式原樣保留", async (mode) => {
         const result = await mountEditor({mode, value: MIXED});
         const {page} = result;
         await page.evaluate(() => window.harness.ref().focus());
@@ -263,7 +263,7 @@ describe("React 16.9", () => {
     });
 
     it("mode 變動：重建編輯器，內容保留", async () => {
-        const result = await mountEditor({mode: "ir", value: "原本"});
+        const result = await mountEditor({value: "原本"});
         const {page} = result;
         await page.evaluate(() => {
             window.harness.ref().setValue("改過的內容");
